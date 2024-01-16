@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UMKT HOTSPOT</title>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="assets/css/styles.min.css" />
+    <link rel="icon" type="image/png" href="img/ico.ico"/>
+    
+</head>
+
+<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed" style="background-image: url(assets/images/bg.jpg);">
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+
+    </script>
+    $(endif)
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-center">
+                  <a href="#" class="text-nowrap logo-img text-left d-block py-3">
+                    <img src="assets/images/logo.png" width="65" alt="">
+                  </a>
+                  <h3 class="text-center ms-2">HOTSPOT UMKT</h3>
+                </div>
+
+                <h2 class="text-center">LOGIN PORTAL</h2>
+                <p class="text-center mb-2">Silahkan Login Menggunakan Akun SSO</p>
+
+                <p class="text-center $(if error)alert$(endif)">
+                    $(if error == "") <br/> 
+                    $(endif)
+                    $(if error)$(error)$(endif)
+                </p>
+
+                <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                    <input type="hidden" name="dst" value="$(link-orig)" />
+                    <input type="hidden" name="popup" value="true" />
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                    <input name="username" type="text" value="$(username)" placeholder="Username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input name="password" type="password" placeholder="Password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <a class="text-primary fw-bold" href="https://sso.umkt.ac.id/pilih-metode/">Lupa Password ?</a>
+                  </div>
+                  <input type="submit" value="Connect" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"/>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-3 mb-0 fw-bold">Akses Internet Tanpa Login?</p>
+                    <a class="text-primary fw-bold ms-2" href="trial.html">Coba Trial</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</body>
+
+</html>

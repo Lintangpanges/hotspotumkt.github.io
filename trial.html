@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HOTSPOT UMKT</title>
+  <link rel="shortcut icon" type="image/png" href="assets/images/ico.ico" />
+  <link rel="stylesheet" href="assets/css/styles.min.css" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed" style="background-image: url(assets/images/bg.jpg);">
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+
+    </script>
+    $(endif)
+    <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-center">
+                  <a href="./index.html" class="text-nowrap logo-img text-left d-block py-3">
+                    <img src="assets/images/logo.png" width="65" alt="">
+                  </a>
+                  <h3 class="text-center ms-2">HOTSPOT UMKT</h3>
+                </div>
+                <h2 class="text-center">LOGIN PORTAL</h2>
+                <div class="d-flex align-items-center justify-content">
+                  <p class="fs-2 mb-2 ">Gunakan mode trial bagi pengguna/tamu yang ingin mengakses internet tanpa harus mendaftarkan akun *NOTE: Mode ini hanya dapat bertahan untuk batas pemakaian 2 jam saja</p>                
+                </div>
+                <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>   
+                  <input type="hidden" name="dst" value="$(link-orig)" />
+                  <input type="hidden" name="popup" value="true" />    
+                  $(if trial == 'yes')       
+                  <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">Connect</a>
+                  $(endif)
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-3 mb-0 fw-bold">Login Menggunakan SSO?</p>
+                    <a class="text-primary fw-bold ms-2" href="login.html">Sign In</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
